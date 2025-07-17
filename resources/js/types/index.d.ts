@@ -41,3 +41,21 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Invitation {
+    id: number;
+    tracking_id: string;
+    name: string;
+    email: string;
+    role: string;
+    expires_at: string;
+    expired_in_days: number;
+    invited_by: User;
+    accepted_at: string;
+    accepted_by: User;
+    email_sent_at: string;
+    last_accessed_at: string;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}

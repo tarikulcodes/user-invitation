@@ -14,9 +14,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::post('invitations', [InvitationController::class, 'invite'])->name('invitations.invite');
-
     Route::resource('users', UserController::class);
+    Route::resource('invitations', InvitationController::class);
 });
 
 

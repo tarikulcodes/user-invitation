@@ -10,7 +10,7 @@ class Invitation extends Model
         'tracking_id',
         'name',
         'email',
-        'roles',
+        'role',
         'expires_at',
         'expired_in_days',
         'invited_by_id',
@@ -21,7 +21,6 @@ class Invitation extends Model
     ];
 
     protected $casts = [
-        'roles' => 'array',
         'expires_at' => 'datetime',
         'accepted_at' => 'datetime',
         'email_sent_at' => 'datetime',

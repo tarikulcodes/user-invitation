@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('tracking_id')->unique();
             $table->string('name')->nullable();
             $table->string('email');
-            $table->json('roles')->nullable();
+            $table->string('role')->nullable();
             $table->timestamp('expires_at');
             $table->integer('expired_in_days');
             $table->foreignId('invited_by_id')->nullable()->constrained('users')->nullOnDelete();
