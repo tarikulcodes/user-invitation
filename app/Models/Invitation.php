@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Invitation extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'tracking_id',
         'name',

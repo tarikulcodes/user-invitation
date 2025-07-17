@@ -9,14 +9,19 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
+// Public invitation registration route
+Route::get('/invitation/{tracking_id}/register', [InvitationController::class, 'registerForm'])->middleware('signed')->name('invitation.register');
+Route::post('/invitation/{tracking_id}/register', [InvitationController::class, 'register'])->middleware('signed')->name('invitation.register');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
     Route::resource('users', UserController::class);
-    Route::resource('invitations', InvitationController::class);
+    Route::resource('invitations', InvitationController::class)->only(['index', 'create', 'store', 'destroy']);
 });
+
 
 
 require __DIR__ . '/settings.php';
