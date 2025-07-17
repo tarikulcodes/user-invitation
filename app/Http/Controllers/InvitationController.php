@@ -102,19 +102,10 @@ class InvitationController extends Controller
         ])->save();
 
         // Verify the email matches if provided in the signed URL
-        if ($request->has('email') && $invitation->email !== $request->get('email')) {
-            abort(403, 'Invalid invitation link.');
+        if (($request->has('email') && $invitation->email !== $request->get('email')) || $invitation->expires_at->isPast() || $invitation->accepted_at) {
+            abort(403, 'The link is invalid or expired.');
         }
 
-        // Check if invitation has expired
-        if ($invitation->expires_at->isPast()) {
-            abort(410, 'This invitation has expired.');
-        }
-
-        // Check if invitation was already used
-        if ($invitation->accepted_at) {
-            abort(410, 'This invitation has already been used.');
-        }
 
         return Inertia::render('auth/invitation-register', [
             'invitation' => $invitation,
@@ -133,18 +124,8 @@ class InvitationController extends Controller
         ])->save();
 
         // Verify the email matches if provided in the signed URL
-        if ($request->has('email') && $invitation->email !== $request->get('email')) {
-            abort(403, 'Invalid invitation link.');
-        }
-
-        // Check if invitation has expired
-        if ($invitation->expires_at->isPast()) {
-            abort(410, 'This invitation has expired.');
-        }
-
-        // Check if invitation was already used
-        if ($invitation->accepted_at) {
-            abort(410, 'This invitation has already been used.');
+        if (($request->has('email') && $invitation->email !== $request->get('email')) || $invitation->expires_at->isPast() || $invitation->accepted_at) {
+            abort(403, 'The link is invalid or expired.');
         }
 
         $validated = $request->validate([
@@ -158,6 +139,7 @@ class InvitationController extends Controller
             'email' => $invitation->email,
             'password' => bcrypt($validated['password']),
             'email_verified_at' => now(), // Auto-verify since they came through invitation
+            'role' => $invitation->role,
         ]);
 
         // Mark invitation as used

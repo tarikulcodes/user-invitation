@@ -1,5 +1,6 @@
 import { DataTable } from '@/components/datatable';
 import { DataTableColumnHeader } from '@/components/datatable-column-header';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
@@ -51,6 +52,9 @@ const InvitationsIndex = ({ invitations }: { invitations: Invitation[] }) => {
         {
             accessorKey: 'accepted_by',
             header: ({ column }) => <DataTableColumnHeader column={column} title="Accepted By" />,
+            cell: ({ row }) => {
+                return <Badge variant="outline">{row.original.accepted_by?.name}</Badge>;
+            },
         },
         {
             header: 'Actions',

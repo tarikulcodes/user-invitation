@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\URL;
 
-class InvitationNotification extends Notification implements ShouldQueue
+class InvitationNotification extends Notification
 {
     use Queueable;
 

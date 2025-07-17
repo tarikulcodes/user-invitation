@@ -45,6 +45,13 @@ const UsersIndex = ({ users }: { users: User[] }) => {
             },
         },
         {
+            header: 'Role',
+            accessorKey: 'role',
+            cell: ({ row }) => {
+                return <Badge variant="outline">{row.original.role?.charAt(0).toUpperCase() + row.original.role?.slice(1)}</Badge>;
+            },
+        },
+        {
             header: 'Created At',
             accessorKey: 'created_at',
         },
