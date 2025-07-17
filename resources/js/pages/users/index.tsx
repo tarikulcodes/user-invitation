@@ -2,10 +2,11 @@ import { DataTable } from '@/components/datatable';
 import { DataTableColumnHeader } from '@/components/datatable-column-header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { User } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 
 const UsersIndex = ({ users }: { users: User[] }) => {
@@ -48,7 +49,7 @@ const UsersIndex = ({ users }: { users: User[] }) => {
             header: 'Role',
             accessorKey: 'role',
             cell: ({ row }) => {
-                return <Badge variant="outline">{row.original.role?.charAt(0).toUpperCase() + row.original.role?.slice(1)}</Badge>;
+                return <Badge variant="outline">{row.original.role}</Badge>;
             },
         },
         {
@@ -59,11 +60,27 @@ const UsersIndex = ({ users }: { users: User[] }) => {
             header: 'Updated At',
             accessorKey: 'updated_at',
         },
+        {
+            header: 'Actions',
+            cell: ({ row }) => {
+                return (
+                    <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => router.delete(route('users.destroy', row.original.id))}
+                        disabled={row.original.id === 1 || row.original.id === 2}
+                    >
+                        Delete
+                    </Button>
+                );
+            },
+        },
     ];
 
     return (
         <AppLayout>
             <Head title="Users" />
+            {/* <pre>{JSON.stringify(users, null, 2)}</pre> */}
             <div className="p-4">
                 <h1 className="mb-4 text-2xl font-bold">Users</h1>
                 <Card>

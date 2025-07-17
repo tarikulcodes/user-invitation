@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Mail, Users } from 'lucide-react';
+import { BookOpen, Github, LayoutGrid, Mail, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -17,23 +17,25 @@ const mainNavItems: NavItem[] = [
         title: 'Users',
         href: '/users',
         icon: Users,
+        requiresAdmin: true,
     },
     {
         title: 'Invitations',
         href: '/invitations',
         icon: Mail,
+        requiresAdmin: true,
     },
 ];
 
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        href: 'https://github.com/tarikulcodes/user-invitation',
+        icon: Github,
     },
     {
         title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
+        href: 'https://github.com/tarikulcodes/user-invitation/blob/main/README.md',
         icon: BookOpen,
     },
 ];

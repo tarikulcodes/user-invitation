@@ -17,12 +17,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-
-    Route::resource('users', UserController::class);
-    Route::resource('invitations', InvitationController::class)->only(['index', 'create', 'store', 'destroy']);
 });
 
-
+Route::middleware(['auth', 'admin'])->group(function () {
+    require __DIR__ . '/admin.php';
+});
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
